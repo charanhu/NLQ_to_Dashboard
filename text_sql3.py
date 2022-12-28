@@ -17,10 +17,18 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
 
 
-# read train and test data
+# Extract the dataset from the input relational database in CSV format using the Apache Common CSV Library.
 train = pd.read_csv('/kaggle/input/wikisql/train.csv')
 test = pd.read_csv('/kaggle/input/wikisql/test.csv')
 val = pd.read_csv('/kaggle/input/wikisql/val.csv')
 
-# mearge train, test and val data to data
-data = pd.concat([train, test, val], ignore_index=True)
+data = pd.concat([train, test, val], axis=0)
+
+# Pre-process the dataset by Creating a temporary feature vector by obtaining the unique values of each attribute. 
+def get_unique_values(data):
+    unique_values = {}
+    for col in data.columns:
+        unique_values[col] = data[col].unique()
+    return unique_values
+
+unique_values = get_unique_values(data)

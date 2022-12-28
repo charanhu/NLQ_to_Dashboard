@@ -1,0 +1,6 @@
+pricing
+security
+sdk to 
+type of graphs
+integration with power bi, tablue etc,..
+API's
